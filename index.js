@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const emailRoute = require("./routes/email");
+const PORT = process.env.PORT || 8800;
 
 
 dotenv.config();
@@ -36,6 +37,6 @@ app.get('/', (req, res) => {
 
 
 
-app.listen(8800, () => {
+app.listen(PORT, () => {
     console.log('backend sever is running!');
 })
