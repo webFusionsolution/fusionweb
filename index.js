@@ -33,10 +33,7 @@ app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/email", emailRoute);
 
-app.use(cors({ 
-    origin: API, 
-    credentials: true 
-}));
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send('welcome to homepage')
