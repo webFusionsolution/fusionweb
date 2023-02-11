@@ -4,10 +4,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const cors = require('cors');
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const emailRoute = require("./routes/email");
 const PORT = process.env.PORT || 8800;
+const API = process.env.REACT_APP_PROD_API;
 
 
 dotenv.config();
@@ -50,11 +52,14 @@ app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/email", emailRoute);
 
+app.use(cors({ 
+    origin: API, 
+    credentials: true 
+}));
+
 app.get('/', (req, res) => {
     res.send('welcome to homepage')
 })
-
-
 
 
 app.listen(PORT, () => {
