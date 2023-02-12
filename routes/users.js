@@ -24,7 +24,6 @@ router.get('/:email', async (req, res) => {
 
 router.post('/contact', async (req, res) => {
     try {
-        const user = await Contact.findOne({ email: req.body.email });
         const newContact = new Contact({
             name: req.body.name,
             email: req.body.email,
@@ -36,7 +35,7 @@ router.post('/contact', async (req, res) => {
         res.status(200).json(contact);    
 
     } catch (error) {
-        res.status(500).json('error');
+        res.status(500).json(error);
     }
 });
 
