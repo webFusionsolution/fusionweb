@@ -25,19 +25,15 @@ router.get('/:email', async (req, res) => {
 router.post('/contact', async (req, res) => {
     try {
         const user = await Contact.findOne({ email: req.body.email });
-        if (!user) {
-            const newContact = new Contact({
-                name: req.body.name,
-                email: req.body.email,
-                phone: req.body.phone,
-                message: req.body.message
-            });
-            // save new contact
-            const contact = await newContact.save();
-            res.status(200).json(contact);
-        } else {
-            res.status(400).json("You query is already being process");
-        }        
+        const newContact = new Contact({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            message: req.body.message
+        });
+        // save new contact
+        const contact = await newContact.save();
+        res.status(200).json(contact);    
 
     } catch (error) {
         res.status(500).json('error');
