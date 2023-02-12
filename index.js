@@ -25,7 +25,10 @@ mongoose.connect(process.env.MONGO_URL, {
 
 // Middle ware
 app.use(express.json());
-app.use(helmet());
+app.use(helmet({
+    crossOriginEmbedderPolicy: false,
+    rossOriginResourcePolicy: false,
+}));
 app.use(morgan("common"));
 
 // Add headers before the routes are defined
@@ -40,14 +43,9 @@ app.use((req, res, next) => {
       'Access-Control-Allow-Headers',
       'Origin, X-Requested-With,Content-Type,Accept'
     );
+    res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
     next();
 });
-app.use(
-    helmet({
-      crossOriginEmbedderPolicy: false,
-      // ...
-    })
-)
 
 app.get('/', (req, res) => {
     res.send('welcome to homepage')
