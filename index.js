@@ -32,29 +32,26 @@ app.use(morgan("common"));
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', "http://fusionweb.in");
+    // res.setHeader('Access-Control-Allow-Origin', "http://fusionweb.in");
 
-    // Request methods you wish to allow
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    // Request headers you wish to allow
-    res.setHeader('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+    // // Request methods you wish to allow
+    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    // // Request headers you wish to allow
+    // res.setHeader('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
     
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    // // Set to true if you need the website to include cookies in the requests sent
+    // // to the API (e.g. in case you use sessions)
+    // res.setHeader('Access-Control-Allow-Credentials', true);
 
-    // Pass to next layer of middleware
-    next();
+    // // Pass to next layer of middleware
+    // next();
 });
+
+app.use(cors()); // <---- use cors middleware
 
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/email", emailRoute);
-
-app.use(cors({ 
-    origin: API, 
-    credentials: true 
-}));
 
 app.get('/', (req, res) => {
     res.send('welcome to homepage')
