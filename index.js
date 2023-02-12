@@ -42,6 +42,12 @@ app.use((req, res, next) => {
     );
     next();
 });
+app.use(
+    helmet({
+      crossOriginEmbedderPolicy: false,
+      // ...
+    })
+)
 
 app.get('/', (req, res) => {
     res.send('welcome to homepage')
