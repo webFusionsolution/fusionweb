@@ -25,10 +25,7 @@ mongoose.connect(process.env.MONGO_URL, {
 
 // Middle ware
 app.use(express.json());
-app.use(helmet({
-    crossOriginEmbedderPolicy: false,
-    rossOriginResourcePolicy: false,
-}));
+app.use(helmet());
 app.use(morgan("common"));
 
 // Add headers before the routes are defined
@@ -36,16 +33,13 @@ app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/email", emailRoute);
 
-//app.use(cors());
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With,Content-Type,Accept'
-    );
-    res.setHeader('Cross-Origin-Resource-Policy', 'same-site');
-    next();
-});
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
+
+app.use(cors(corsOptions)) // Use this after the variable declaration
 
 app.get('/', (req, res) => {
     res.send('welcome to homepage')
