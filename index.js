@@ -58,6 +58,7 @@ app.get('/', (req, res) => {
 })
 
 
-app.listen(PORT, () => {
-    console.log('backend sever is running!');
-})
+const server = app.listen(PORT || 8800, () => {
+    const port = server.address().port;
+    console.log(`console.log('backend sever is running!'); ${port}`);
+});
